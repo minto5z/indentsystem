@@ -55,17 +55,17 @@ class _LoginScreenState extends State<LoginScreen> {
             Column(
               children: [
                 ScrollableForm(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 90,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: 250),
-                          child: Text(
+                          constraints: const BoxConstraints(maxWidth: 250),
+                          child: const Text(
                             'Welcome Back',
                             style: TextStyle(
                               fontSize: 46,
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 70,
                         ),
                         _form(node, context),
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
           }),
           onEditingComplete: () => node.nextFocus(),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         MainTextField(
@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontSize: 30,
               ),
             ),
-            Spacer(),
+            const Spacer(),
             NextButton(
               onPressed: () => _login(context),
               loading: _loading,
