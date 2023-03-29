@@ -188,7 +188,7 @@ class _FooterButtons extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Row(
         children: [
-          const Spacer(),
+          Spacer(),
           UnderlinedButton(
             onPressed: () => Navigator.pushNamed(
               context,
