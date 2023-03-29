@@ -116,12 +116,12 @@ class _LoginScreenState extends State<LoginScreen> {
             _login(context);
           },
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Row(
           children: [
-            Text(
+            const Text(
               'Sign In',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -188,7 +188,7 @@ class _FooterButtons extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Row(
         children: [
-          Spacer(),
+          const Spacer(),
           UnderlinedButton(
             onPressed: () => Navigator.pushNamed(
               context,
