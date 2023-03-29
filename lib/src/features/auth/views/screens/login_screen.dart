@@ -188,14 +188,6 @@ class _FooterButtons extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Row(
         children: [
-          // UnderlinedButton(
-          //   onPressed: () => Navigator.pushNamed(
-          //     context,
-          //     RegisterScreen.routeName,
-          //   ),
-          //   child: Text('Sign Up'),
-          //   color: theme.highlightColor,
-          // ),
           const Spacer(),
           UnderlinedButton(
             onPressed: () => Navigator.pushNamed(
