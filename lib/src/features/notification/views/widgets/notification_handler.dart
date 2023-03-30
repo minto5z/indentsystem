@@ -1,8 +1,7 @@
-import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
-import 'package:indentsystem/src/features/auth/logic/models/user.dart';
-import 'package:indentsystem/src/features/notification/logic/repository/notification_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
+import 'package:indentsystem/src/features/notification/logic/repository/notification_repository.dart';
 
 import '../../../auth/logic/models/LoginResponse.dart';
 

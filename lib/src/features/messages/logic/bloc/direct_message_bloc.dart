@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:indentsystem/src/core/socket.dart';
 import 'package:indentsystem/src/features/auth/logic/models/user.dart';
 import 'package:indentsystem/src/features/user/logic/repository/user_repository.dart';
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 part 'direct_message_event.dart';

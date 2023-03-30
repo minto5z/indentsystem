@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indentsystem/src/app.dart';
 import 'package:indentsystem/src/core/socket.dart';
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
@@ -9,9 +12,6 @@ import 'package:indentsystem/src/features/messages/logic/enum/message_type.dart'
 import 'package:indentsystem/src/features/messages/logic/models/message.dart';
 import 'package:indentsystem/src/features/messages/logic/models/typing.dart';
 import 'package:indentsystem/src/features/messages/logic/repository/message_repository.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../auth/logic/models/LoginResponse.dart';
 

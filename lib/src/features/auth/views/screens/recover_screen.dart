@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
 import 'package:indentsystem/src/features/auth/views/screens/login_screen.dart';
 import 'package:indentsystem/src/features/auth/views/screens/register_screen.dart';
-import 'package:indentsystem/src/shared/views/widgets/dialog/alert_dialog_widget.dart';
 import 'package:indentsystem/src/shared/views/widgets/circles_background.dart';
+import 'package:indentsystem/src/shared/views/widgets/dialog/alert_dialog_widget.dart';
 import 'package:indentsystem/src/shared/views/widgets/go_back_button.dart';
 import 'package:indentsystem/src/shared/views/widgets/main_text_field.dart';
 import 'package:indentsystem/src/shared/views/widgets/next_button.dart';
 import 'package:indentsystem/src/shared/views/widgets/scrollable_form.dart';
 import 'package:indentsystem/src/shared/views/widgets/underlined_button.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RecoverScreen extends StatefulWidget {

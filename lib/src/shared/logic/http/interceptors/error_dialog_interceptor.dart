@@ -1,9 +1,9 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:indentsystem/src/app.dart';
 import 'package:indentsystem/src/features/auth/logic/interceptors/auth_token_interceptor.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
 import 'package:indentsystem/src/shared/views/widgets/dialog/alert_dialog_widget.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ErrorDialogInterceptor extends Interceptor {

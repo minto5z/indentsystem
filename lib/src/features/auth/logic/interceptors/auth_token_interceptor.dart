@@ -1,10 +1,9 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:indentsystem/src/app.dart';
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
 import 'package:indentsystem/src/features/auth/logic/models/OauthResponse.dart';
-import 'package:indentsystem/src/features/auth/logic/models/tokens.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AuthTokenInterceptor extends Interceptor {

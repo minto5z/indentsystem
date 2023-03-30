@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
 import 'package:indentsystem/src/features/auth/views/screens/recover_screen.dart';
 import 'package:indentsystem/src/features/home/views/screens/home_screen.dart';
@@ -6,8 +8,6 @@ import 'package:indentsystem/src/shared/views/widgets/main_text_field.dart';
 import 'package:indentsystem/src/shared/views/widgets/next_button.dart';
 import 'package:indentsystem/src/shared/views/widgets/scrollable_form.dart';
 import 'package:indentsystem/src/shared/views/widgets/underlined_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {

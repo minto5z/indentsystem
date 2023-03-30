@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indentsystem/src/features/messages/logic/bloc/direct_message_bloc.dart';
 import 'package:indentsystem/src/features/messages/logic/bloc/message_bloc.dart';
 import 'package:indentsystem/src/features/messages/logic/enum/message_type.dart';
 import 'package:indentsystem/src/features/messages/views/widgets/messages.dart';
 import 'package:indentsystem/src/shared/views/widgets/user_status.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DirectMessageArguments {
   final String username;

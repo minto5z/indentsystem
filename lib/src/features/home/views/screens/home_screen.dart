@@ -1,9 +1,8 @@
-import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
-import 'package:indentsystem/src/features/auth/logic/models/user.dart';
-import 'package:indentsystem/src/features/auth/views/screens/login_screen.dart';
-import 'package:indentsystem/src/features/home/views/widgets/authenticated_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
+import 'package:indentsystem/src/features/auth/views/screens/login_screen.dart';
+import 'package:indentsystem/src/features/home/views/widgets/authenticated_home.dart';
 
 import '../../../auth/logic/models/LoginResponse.dart';
 

@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indentsystem/src/app.dart';
 import 'package:indentsystem/src/constants/environments.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
 import 'package:indentsystem/src/shared/views/widgets/dialog/alert_dialog_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SocketManager {
   Socket socket = io(

@@ -1,5 +1,5 @@
-import 'package:indentsystem/src/features/auth/logic/models/user.dart';
 import 'package:equatable/equatable.dart';
+import 'package:indentsystem/src/features/auth/logic/models/user.dart';
 
 class Message extends Equatable {
   late final String id;

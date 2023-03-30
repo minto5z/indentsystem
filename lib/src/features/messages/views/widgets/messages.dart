@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
 import 'package:indentsystem/src/features/auth/logic/models/LoginResponse.dart';
 import 'package:indentsystem/src/features/auth/logic/models/user.dart';
@@ -10,9 +13,6 @@ import 'package:indentsystem/src/features/messages/views/screens/direct_message_
 import 'package:indentsystem/src/shared/views/widgets/dialog/confirm_dialog_widget.dart';
 import 'package:indentsystem/src/shared/views/widgets/main_text_field.dart';
 import 'package:indentsystem/src/shared/views/widgets/typing_indicator.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class Messages extends StatefulWidget {

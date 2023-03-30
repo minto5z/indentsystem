@@ -1,11 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indentsystem/src/app_router.dart';
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
 import 'package:indentsystem/src/features/auth/logic/models/LoginResponse.dart';
-import 'package:indentsystem/src/features/auth/logic/models/user.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
 import 'package:indentsystem/src/features/home/views/screens/home_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 final GlobalKey<NavigatorState> applicationKey = GlobalKey();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey();

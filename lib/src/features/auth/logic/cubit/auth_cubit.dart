@@ -1,7 +1,6 @@
-import 'package:indentsystem/src/features/auth/logic/models/user.dart';
+import 'package:bloc/bloc.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
 import 'package:indentsystem/src/features/notification/logic/repository/notification_repository.dart';
-import 'package:bloc/bloc.dart';
 
 import '../models/LoginResponse.dart';
 

@@ -1,7 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:indentsystem/src/constants/environments.dart';
 import 'package:indentsystem/src/features/auth/logic/interceptors/auth_token_interceptor.dart';
 import 'package:indentsystem/src/shared/logic/http/interceptors/error_dialog_interceptor.dart';
-import 'package:dio/dio.dart';
 
 export 'package:dio/dio.dart';
 

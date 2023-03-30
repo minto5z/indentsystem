@@ -1,12 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:indentsystem/src/app.dart';
 import 'package:indentsystem/src/core/socket.dart';
 import 'package:indentsystem/src/features/messages/views/screens/direct_message_screen.dart';
 import 'package:indentsystem/src/features/messages/views/widgets/messages.dart';
 import 'package:indentsystem/src/features/notification/logic/enums/notification_type.dart';
 import 'package:indentsystem/src/features/notification/logic/repository/subscription_repository.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 
 class NotificationRepository {
   FirebaseMessaging get _fcm => FirebaseMessaging.instance;

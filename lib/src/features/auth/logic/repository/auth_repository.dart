@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:indentsystem/src/features/auth/logic/models/LoginResponse.dart';
-import 'package:indentsystem/src/features/auth/logic/models/tokens.dart';
-import 'package:indentsystem/src/features/auth/logic/models/user.dart';
-import 'package:indentsystem/src/features/auth/logic/provider/auth_api_provider.dart';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as store;
+import 'package:indentsystem/src/features/auth/logic/models/LoginResponse.dart';
+import 'package:indentsystem/src/features/auth/logic/provider/auth_api_provider.dart';
 
 import '../models/OauthResponse.dart';
 
