@@ -4,6 +4,8 @@ import 'package:indentsystem/src/features/notification/logic/repository/notifica
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../auth/logic/models/LoginResponse.dart';
+
 class NotificationHandler extends StatefulWidget {
   NotificationHandler({Key? key}) : super(key: key);
 
@@ -23,7 +25,7 @@ class _NotificationHandlerState extends State<NotificationHandler> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, User?>(
+    return BlocListener<AuthCubit, UserInfo?>(
       listenWhen: (prev, curr) => curr != null,
       listener: (context, state) => notificationRepository.requestPermission(),
       child: Container(),

@@ -13,6 +13,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../auth/logic/models/LoginResponse.dart';
+
 part 'message_event.dart';
 part 'message_state.dart';
 
@@ -34,7 +36,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
 
   final BuildContext context;
 
-  User? currentUser;
+  UserInfo? currentUser;
 
   final bool fromMessages;
 

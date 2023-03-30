@@ -3,7 +3,9 @@ import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.
 import 'package:indentsystem/src/features/notification/logic/repository/notification_repository.dart';
 import 'package:bloc/bloc.dart';
 
-class AuthCubit extends Cubit<User?> {
+import '../models/LoginResponse.dart';
+
+class AuthCubit extends Cubit<UserInfo?> {
   AuthRepository authRepository;
 
   AuthCubit({required this.authRepository}) : super(null);
@@ -12,13 +14,13 @@ class AuthCubit extends Cubit<User?> {
     return _loginWith(() => authRepository.authenticate(username, password));
   }
 
-  Future<void> register(String username, String password, String email) async {
-    return _loginWith(() => authRepository.register(username, password, email));
-  }
+  // Future<void> register(String username, String password, String email) async {
+  //   return _loginWith(() => authRepository.register(username, password, email));
+  // }
 
-  Future<void> logoutFromAllDevices() async {
-    return _loginWith(() => authRepository.logoutFromAllDevices());
-  }
+  // Future<void> logoutFromAllDevices() async {
+  //   return _loginWith(() => authRepository.logoutFromAllDevices());
+  // }
 
   Future<void> _loginWith(Function method) async {
     await method();
@@ -35,6 +37,6 @@ class AuthCubit extends Cubit<User?> {
   }
 
   Future<void> updateProfile() async {
-    emit(await this.authRepository.getProfile());
+    emit(await authRepository.getProfile());
   }
 }

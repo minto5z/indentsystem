@@ -9,7 +9,7 @@ class MainTextField extends StatelessWidget {
   final bool passwordField;
   final bool emailField;
   final bool messageField;
-  final bool usernameField;
+  final bool loginidField;
   final Color? textColor;
 
   const MainTextField({
@@ -21,7 +21,7 @@ class MainTextField extends StatelessWidget {
     this.passwordField = false,
     this.emailField = false,
     this.messageField = false,
-    this.usernameField = false,
+    this.loginidField = false,
     this.textColor,
     required this.label,
   }) : super(key: key);
@@ -52,7 +52,7 @@ class MainTextField extends StatelessWidget {
               : null,
       obscureText: passwordField,
       maxLength: passwordField ? 60 : null,
-      autocorrect: !usernameField && !emailField,
+      autocorrect: !loginidField && !emailField,
       controller: controller,
       onChanged: onChanged,
       onEditingComplete: onEditingComplete,

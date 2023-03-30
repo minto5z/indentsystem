@@ -7,8 +7,10 @@ import 'package:indentsystem/src/shared/views/widgets/underlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../auth/logic/models/LoginResponse.dart';
+
 class AuthenticatedHome extends StatelessWidget {
-  final User user;
+  final UserInfo user;
 
   AuthenticatedHome({
     Key? key,
@@ -26,17 +28,17 @@ class AuthenticatedHome extends StatelessWidget {
       topRightCircleColor: Colors.white,
       bottomRightCircleColor: theme.highlightColor,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             NotificationHandler(),
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
             ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 300),
-              child: Text(
+              constraints: const BoxConstraints(maxWidth: 300),
+              child: const Text(
                 'Authentication Application',
                 style: TextStyle(
                   fontSize: 40,
@@ -45,11 +47,11 @@ class AuthenticatedHome extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Authenticated as ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -57,7 +59,7 @@ class AuthenticatedHome extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  user.username,
+                  user.email!,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: theme.highlightColor,
@@ -74,30 +76,30 @@ class AuthenticatedHome extends StatelessWidget {
                 Row(
                   children: [
                     UnderlinedButton(
-                      child: Text('Logout'),
                       color: theme.secondaryHeaderColor,
                       onPressed: () => context.read<AuthCubit>().logout(),
+                      child: const Text('Logout'),
                     ),
                     UnderlinedButton(
-                      child: Text('Settings'),
                       color: theme.secondaryHeaderColor,
                       onPressed: () => Navigator.pushNamed(
                         context,
                         SettingsScreen.routeName,
                       ),
+                      child: const Text('Settings'),
                     )
                   ],
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Row(
               children: [
-                Spacer(),
+                const Spacer(),
                 UnderlinedButton(
-                  child: Text('Logout'),
                   color: theme.highlightColor,
                   onPressed: () => context.read<AuthCubit>().logout(),
+                  child: const Text('Logout'),
                 ),
               ],
             ),

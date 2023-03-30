@@ -13,9 +13,9 @@ import 'package:provider/provider.dart';
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
 
-  static route() => MaterialPageRoute(builder: (_) => LoginScreen());
+  static route() => MaterialPageRoute(builder: (_) => const LoginScreen());
 
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -24,7 +24,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
 
-  String _username = '';
+  String _login_id = '';
   bool _loading = false;
 
   @override
@@ -94,10 +94,10 @@ class _LoginScreenState extends State<LoginScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         MainTextField(
-          label: 'Username',
-          usernameField: true,
+          label: 'LoginId',
+          loginidField: true,
           onChanged: (value) => setState(() {
-            _username = value;
+            _login_id = value;
           }),
           onEditingComplete: () => node.nextFocus(),
         ),
@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _loginWith(
       context,
       () => bloc.authenticate(
-        _username,
+        _login_id,
         _passwordController.text,
       ),
     );

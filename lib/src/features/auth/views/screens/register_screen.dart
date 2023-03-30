@@ -96,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       children: [
         MainTextField(
           label: 'Username',
-          usernameField: true,
+          loginidField: true,
           onChanged: (value) => setState(() {
             _username = value;
           }),
@@ -123,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           onSubmitted: (_) {
             node.unfocus();
 
-            _registerWithAccount(context);
+            //_registerWithAccount(context);
           },
         ),
         SizedBox(
@@ -140,7 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Spacer(),
             NextButton(
-              onPressed: () => _registerWithAccount(context),
+              //onPressed: () => _registerWithAccount(context),
               loading: _loading,
             )
           ],
@@ -149,17 +149,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  _registerWithAccount(BuildContext context) async {
-    final bloc = context.read<AuthCubit>();
-
-    return _registerWith(context, () {
-      return bloc.register(
-        _username,
-        _passwordController.text,
-        _email,
-      );
-    });
-  }
+  // _registerWithAccount(BuildContext context) async {
+  //   final bloc = context.read<AuthCubit>();
+  //
+  //   return _registerWith(context, () {
+  //     return bloc.register(
+  //       _username,
+  //       _passwordController.text,
+  //       _email,
+  //     );
+  //   });
+  // }
 
   _registerWith(BuildContext context, Future<void> Function() method) async {
     if (_loading) {

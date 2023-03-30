@@ -1,5 +1,6 @@
 import 'package:indentsystem/src/app_router.dart';
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
+import 'package:indentsystem/src/features/auth/logic/models/LoginResponse.dart';
 import 'package:indentsystem/src/features/auth/logic/models/user.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
 import 'package:indentsystem/src/features/home/views/screens/home_screen.dart';
@@ -65,7 +66,7 @@ class _InitProviders extends StatelessWidget {
         create: (context) => AuthCubit(
           authRepository: context.read<AuthRepository>(),
         ),
-        child: BlocListener<AuthCubit, User?>(
+        child: BlocListener<AuthCubit, UserInfo?>(
           listenWhen: (prev, curr) => prev != null && curr == null,
           listener: (context, user) {
             final route = ModalRoute.of(context)?.settings.name;

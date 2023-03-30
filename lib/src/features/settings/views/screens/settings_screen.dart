@@ -1,4 +1,5 @@
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
+import 'package:indentsystem/src/features/auth/logic/models/LoginResponse.dart';
 import 'package:indentsystem/src/features/auth/logic/models/user.dart';
 import 'package:indentsystem/src/features/notification/logic/repository/notification_repository.dart';
 import 'package:indentsystem/src/features/settings/logic/settings_repository.dart';
@@ -39,7 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final user = context.read<AuthCubit>().state;
 
     if (user != null) {
-      _usernameController.text = user.username;
+      _usernameController.text = user.email!;
       _emailController.text = user.email ?? '';
     }
   }
@@ -64,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SizedBox(width: 5)
         ],
       ),
-      body: BlocBuilder<AuthCubit, User?>(
+      body: BlocBuilder<AuthCubit, UserInfo?>(
         builder: (context, state) {
           return ListView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -94,7 +95,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           MainTextField(
                             controller: _usernameController,
                             label: 'Username',
-                            usernameField: true,
+                            loginidField: true,
                             onSubmitted: (_) => _updateUsername(),
                           ),
                           SizedBox(
@@ -155,7 +156,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          if (state != null && !state.isSocial)
+                          if (state != null)
                             Column(
                               children: [
                                 MainTextField(
@@ -310,7 +311,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   _logoutFromAllDevices() async {
-    await context.read<AuthCubit>().logoutFromAllDevices();
+    //await context.read<AuthCubit>().logoutFromAllDevices();
 
     await notificationRepository.requestPermission();
   }

@@ -1,5 +1,6 @@
 import 'package:indentsystem/src/app.dart';
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
+import 'package:indentsystem/src/features/auth/logic/models/OauthResponse.dart';
 import 'package:indentsystem/src/features/auth/logic/models/tokens.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
 import 'package:dio/dio.dart';
@@ -69,23 +70,21 @@ class AuthTokenInterceptor extends Interceptor {
     }
 
     final refreshToken = await repository.getRefreshToken();
-
+    FormData formData = FormData.fromMap({
+      'grant_type': 'client_credentials',
+      'client_id': 1,
+      'client_secret': '8mViQY5U5YbhZ8bQRGhIlQP4eqnaeviCp9FYHgK4'
+    });
     try {
       final response = await api.post(
-        '/auth/refresh-token',
-        data: {
-          'refreshToken': refreshToken,
-        },
-        options: Options(
-          headers: {
-            skipHeader: true,
-          },
-        ),
+        '/oauth/token',
+        data: formData,
+        options: Options(headers: {AuthTokenInterceptor.skipHeader: true}),
       );
 
-      final tokens = Tokens.fromJson(response.data);
+      final tokens = OauthResponse.fromJson(response.data);
 
-      await repository.setTokens(tokens);
+      await repository.setOauthTokens(tokens);
 
       try {
         final headers = requestOptions.headers;

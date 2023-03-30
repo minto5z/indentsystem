@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
+import 'package:indentsystem/src/features/auth/logic/models/LoginResponse.dart';
 import 'package:indentsystem/src/features/auth/logic/models/user.dart';
 import 'package:indentsystem/src/features/messages/logic/bloc/message_bloc.dart';
 import 'package:indentsystem/src/features/messages/logic/enum/message_type.dart';
@@ -213,7 +214,7 @@ class _Messages extends StatelessWidget {
           return Container();
         }
 
-        return BlocBuilder<AuthCubit, User?>(
+        return BlocBuilder<AuthCubit, UserInfo?>(
           builder: (context, user) {
             if (user == null) {
               return Container();
@@ -274,7 +275,7 @@ class _Message extends StatefulWidget {
   final User from;
   final Message? message;
 
-  final User currentUser;
+  final UserInfo currentUser;
 
   const _Message({
     Key? key,
