@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:indentsystem/src/features/auth/logic/interceptors/auth_token_interceptor.dart';
 import 'package:indentsystem/src/features/auth/logic/models/login_response.dart';
 import 'package:indentsystem/src/shared/logic/http/api.dart';
 
+import '../../../../constants/environments.dart';
 import '../models/oauth_response.dart';
 
 class AuthAPIProvider {
@@ -13,30 +15,49 @@ class AuthAPIProvider {
       'password': password,
     });
     FormData oformData = FormData.fromMap({
-      'grant_type': 'client_credentials',
-      'client_id': 1,
-      'client_secret': '8mViQY5U5YbhZ8bQRGhIlQP4eqnaeviCp9FYHgK4'
+      'grant_type': environments.grant_type,
+      'client_id': environments.client_id,
+      'client_secret': environments.client_secret
     });
-    final oauth = await api.post(
-      '/oauth/token',
-      data: oformData,
-      options: Options(headers: {AuthTokenInterceptor.skipHeader: true}),
-    );
+    var otokens;
+    try {
+      final oauth = await api.post(
+        '/oauth/token',
+        data: oformData,
+        options: Options(headers: {AuthTokenInterceptor.skipHeader: true}),
+      );
 
-    final otokens = OauthResponse.fromJson(oauth.data).accessToken;
-    final response = await api.post(
-      '/api/admin/login',
-      options: Options(
-        headers: {
-          Headers.acceptHeader: true,
-          HttpHeaders.authorizationHeader: "Bearer $otokens",
-        },
-      ),
-      data: formData,
-    );
+      otokens = OauthResponse.fromJson(oauth.data).accessToken;
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 404) {
+        Fluttertoast.showToast(
+            msg: '{$e.response?.statusCode}', toastLength: Toast.LENGTH_SHORT);
+      } else {
+        Fluttertoast.showToast(msg: e.message, toastLength: Toast.LENGTH_SHORT);
+      }
+    }
+    var tokens;
+    try {
+      final response = await api.post(
+        '/api/admin/login',
+        options: Options(
+          headers: {
+            Headers.acceptHeader: true,
+            HttpHeaders.authorizationHeader: "Bearer $otokens",
+          },
+        ),
+        data: formData,
+      );
 
-    final tokens = LoginResponse.fromJson(response.data);
-
+      tokens = LoginResponse.fromJson(response.data);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 404) {
+        Fluttertoast.showToast(
+            msg: '{$e.response?.statusCode}', toastLength: Toast.LENGTH_SHORT);
+      } else {
+        Fluttertoast.showToast(msg: e.message, toastLength: Toast.LENGTH_SHORT);
+      }
+    }
     return tokens;
   }
 
@@ -50,16 +71,26 @@ class AuthAPIProvider {
   }
 
   Future<OauthResponse> loginWithRefreshToken() async {
-    final response = await api.post(
-      '/oauth/token',
-      data: {
-        'grant_type': 'client_credentials',
-        'client_id': 1,
-        'client_secret': '8mViQY5U5YbhZ8bQRGhIlQP4eqnaeviCp9FYHgK4'
-      },
-      options: Options(headers: {AuthTokenInterceptor.skipHeader: true}),
-    );
-
-    return OauthResponse.fromJson(response.data);
+    var tokens;
+    try {
+      final response = await api.post(
+        '/oauth/token',
+        data: {
+          'grant_type': environments.grant_type,
+          'client_id': environments.client_id,
+          'client_secret': environments.client_secret
+        },
+        options: Options(headers: {AuthTokenInterceptor.skipHeader: true}),
+      );
+      tokens = OauthResponse.fromJson(response.data);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 404) {
+        Fluttertoast.showToast(
+            msg: '{$e.response?.statusCode}', toastLength: Toast.LENGTH_SHORT);
+      } else {
+        Fluttertoast.showToast(msg: e.message, toastLength: Toast.LENGTH_SHORT);
+      }
+    }
+    return tokens;
   }
 }

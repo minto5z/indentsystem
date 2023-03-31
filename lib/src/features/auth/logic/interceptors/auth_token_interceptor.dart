@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:indentsystem/src/app.dart';
+import 'package:indentsystem/src/constants/environments.dart';
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
 import 'package:indentsystem/src/features/auth/logic/models/oauth_response.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
@@ -67,12 +68,10 @@ class AuthTokenInterceptor extends Interceptor {
     if (requestOptions.headers.containsKey(skipHeader)) {
       return super.onError(err, handler);
     }
-
-    final refreshToken = await repository.getRefreshToken();
     FormData formData = FormData.fromMap({
-      'grant_type': 'client_credentials',
-      'client_id': 1,
-      'client_secret': '8mViQY5U5YbhZ8bQRGhIlQP4eqnaeviCp9FYHgK4'
+      'grant_type': environments.grant_type,
+      'client_id': environments.client_id,
+      'client_secret': environments.client_secret
     });
     try {
       final response = await api.post(

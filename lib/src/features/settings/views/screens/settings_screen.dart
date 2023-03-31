@@ -7,6 +7,8 @@ import 'package:indentsystem/src/shared/views/widgets/dialog/alert_dialog_widget
 import 'package:indentsystem/src/shared/views/widgets/dialog/confirm_dialog_widget.dart';
 import 'package:indentsystem/src/shared/views/widgets/main_text_field.dart';
 
+import '../../../../shared/views/widgets/global_widget.dart';
+
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings';
 
@@ -20,16 +22,14 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   final _repository = SettingsRepository();
-
   final _usernameController = TextEditingController();
-
   final _emailController = TextEditingController();
-
   final _currentPasswordController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   bool _loading = false;
+  final _globalWidget = GlobalWidget();
 
   @override
   void initState() {
@@ -49,20 +49,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final node = FocusScope.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-        actions: [
-          if (_loading)
-            CircleAvatar(
-              backgroundColor: theme.primaryColor,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                color: Colors.white,
-              ),
-            ),
-          SizedBox(width: 5)
-        ],
-      ),
+      backgroundColor: Colors.white,
+      appBar: _globalWidget.globalAppBar(context),
       body: BlocBuilder<AuthCubit, UserInfo?>(
         builder: (context, state) {
           return ListView(

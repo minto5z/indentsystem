@@ -1,126 +1,318 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
-import 'package:indentsystem/src/features/settings/views/screens/settings_screen.dart';
-import 'package:indentsystem/src/shared/views/widgets/underlined_button.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:indentsystem/src/features/auth/views/screens/login_screen.dart';
 
+import '../../../../shared/views/widgets/cache_image_network.dart';
+import '../../../../shared/views/widgets/global_widget.dart';
+import '../../../auth/logic/cubit/auth_cubit.dart';
 import '../../../auth/logic/models/login_response.dart';
+import '../models/banner_slider_model.dart';
+import '../models/category_model.dart';
 
-class AuthenticatedHome extends StatelessWidget {
+class AuthenticatedHome extends StatefulWidget {
   final UserInfo user;
 
-  AuthenticatedHome({
-    Key? key,
-    required this.user,
-  }) : super(key: key);
+  const AuthenticatedHome({super.key, required this.user});
+
+  @override
+  _Home1PageState createState() => _Home1PageState();
+}
+
+class _Home1PageState extends State<AuthenticatedHome> {
+  // initialize global widget
+  final _globalWidget = GlobalWidget();
+
+  final Color _color1 = const Color(0xFF005288);
+  final Color _color2 = const Color(0xFF37474f);
+
+  int _currentImageSlider = 0;
+
+  List<BannerSliderModel> _bannerData = [];
+  List<CategoryModel> _categoryData = [];
+
+  @override
+  void initState() {
+    _bannerData.add(BannerSliderModel(
+        id: 1,
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _bannerData.add(BannerSliderModel(
+        id: 2,
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _bannerData.add(BannerSliderModel(
+        id: 3,
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _bannerData.add(BannerSliderModel(
+        id: 4,
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _bannerData.add(BannerSliderModel(
+        id: 5,
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+
+    _categoryData.add(CategoryModel(
+        id: 1,
+        name: 'Outlet Store',
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _categoryData.add(CategoryModel(
+        id: 2,
+        name: 'Product',
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _categoryData.add(CategoryModel(
+        id: 3,
+        name: 'Buy Online',
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _categoryData.add(CategoryModel(
+        id: 4,
+        name: 'Apply for Credit',
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _categoryData.add(CategoryModel(
+        id: 5,
+        name: 'Credit\nApplication\nStatus',
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _categoryData.add(CategoryModel(
+        id: 6,
+        name: 'Credit Payment',
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _categoryData.add(CategoryModel(
+        id: 7,
+        name: 'Commission',
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _categoryData.add(CategoryModel(
+        id: 8,
+        name: 'Check Point',
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+    _categoryData.add(CategoryModel(
+        id: 9,
+        name: 'Contact Us',
+        image:
+            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset("assets/icons/menu.svg"),
-          color: Colors.black87,
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //SvgPicture.asset("assets/icons/Location.svg"),
-            //const SizedBox(width: defaultPadding / 2),
-            Text(
-              "Indent System",
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: SvgPicture.asset("assets/icons/Notification.svg"),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 80,
-            ),
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 300),
-              child: const Text(
-                'Authentication Application',
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
+        backgroundColor: Colors.white,
+        appBar: _globalWidget.globalAppBar(context),
+        body: ListView(
+          children: [_buildTop(), _buildHomeBanner(), _createMenu()],
+        ));
+  }
+
+  Widget _buildTop() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Fluttertoast.showToast(
+                  msg: 'Click profile picture',
+                  toastLength: Toast.LENGTH_SHORT);
+            },
+            child: Hero(
+              tag: 'profilePicture',
+              child: ClipOval(
+                child: buildCacheNetworkImage(
+                    url:
+                        'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg',
+                    width: 50),
               ),
             ),
-            const Spacer(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Authenticated as ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                  ),
-                ),
-                Text(
-                  user.email!,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black38,
-                    fontSize: 30,
-                  ),
-                ),
-                Text(
-                  '(${user.email})',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black38,
-                  ),
-                ),
-                Row(
-                  children: [
-                    UnderlinedButton(
-                      color: theme.secondaryHeaderColor,
-                      onPressed: () => context.read<AuthCubit>().logout(),
-                      child: const Text('Logout'),
+          ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Fluttertoast.showToast(
+                          msg: 'Click name', toastLength: Toast.LENGTH_SHORT);
+                    },
+                    child: Text(
+                      widget.user.email!,
+                      style: TextStyle(
+                          color: _color2,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    UnderlinedButton(
-                      color: theme.secondaryHeaderColor,
-                      onPressed: () => Navigator.pushNamed(
-                        context,
-                        SettingsScreen.routeName,
-                      ),
-                      child: const Text('Settings'),
-                    )
-                  ],
-                ),
-              ],
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Fluttertoast.showToast(
+                          msg: 'Click platinum member',
+                          toastLength: Toast.LENGTH_SHORT);
+                    },
+                    child: Container(
+                        margin: const EdgeInsets.only(top: 6),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 9, vertical: 6),
+                        decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.star, color: _color2, size: 12),
+                            const SizedBox(width: 4),
+                            Text('platinum member',
+                                maxLines: 1,
+                                style: TextStyle(
+                                    color: _color2,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 9))
+                          ],
+                        )),
+                  )
+                ],
+              ),
             ),
-            const Spacer(),
-            Row(
-              children: [
-                const Spacer(),
-                UnderlinedButton(
-                  color: theme.highlightColor,
-                  onPressed: () => context.read<AuthCubit>().logout(),
-                  child: const Text('Logout'),
-                ),
-              ],
-            ),
-          ],
-        ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 32),
+            width: 1,
+            height: 40,
+            color: Colors.grey[300],
+          ),
+          GestureDetector(
+            onTap: () {
+              // Fluttertoast.showToast(
+              //     msg: 'Click log out', toastLength: Toast.LENGTH_SHORT);
+              context.read<AuthCubit>().logout();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginScreen.routeName,
+                (route) => false,
+              );
+            },
+            child: Text('Log Out',
+                style: TextStyle(color: _color2, fontWeight: FontWeight.bold)),
+          )
+        ],
       ),
+    );
+  }
+
+  Widget _buildHomeBanner() {
+    return Stack(
+      children: [
+        CarouselSlider(
+          items: _bannerData
+              .map((item) => GestureDetector(
+                  onTap: () {
+                    Fluttertoast.showToast(
+                        msg: 'Click banner ${item.id}',
+                        toastLength: Toast.LENGTH_SHORT);
+                  },
+                  child: buildCacheNetworkImage(
+                      width: 0, height: 0, url: item.image)))
+              .toList(),
+          options: CarouselOptions(
+              aspectRatio: 2,
+              viewportFraction: 1.0,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 6),
+              autoPlayAnimationDuration: const Duration(milliseconds: 300),
+              enlargeCenterPage: false,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _currentImageSlider = index;
+                });
+              }),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: _bannerData.map((item) {
+              int index = _bannerData.indexOf(item);
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 150),
+                width: _currentImageSlider == index ? 10 : 5,
+                height: _currentImageSlider == index ? 10 : 5,
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _createMenu() {
+    return GridView.count(
+      childAspectRatio: 1.1,
+      shrinkWrap: true,
+      crossAxisSpacing: 0,
+      mainAxisSpacing: 0,
+      crossAxisCount: 3,
+      children: List.generate(_categoryData.length, (index) {
+        return GestureDetector(
+            onTap: () {
+              Fluttertoast.showToast(
+                  msg:
+                      'Click ${_categoryData[index].name.replaceAll('\n', ' ')}',
+                  toastLength: Toast.LENGTH_SHORT);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey[100]!, width: 0.5),
+                  color: Colors.white),
+              padding: const EdgeInsets.all(8),
+              child: Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                    buildCacheNetworkImage(
+                        width: 40,
+                        height: 40,
+                        url: _categoryData[index].image,
+                        plColor: Colors.transparent),
+                    Container(
+                      margin: const EdgeInsets.only(top: 12),
+                      child: Text(
+                        _categoryData[index].name,
+                        style: TextStyle(
+                          color: _color1,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  ])),
+            ));
+      }),
     );
   }
 }

@@ -29,6 +29,7 @@ class AuthRepository {
   Future<void> logout() async {
     await deleteAccessToken();
     await deleteRefreshToken();
+    await deleteUser();
   }
 
   Future<UserInfo?> getProfile() async {
@@ -52,21 +53,11 @@ class AuthRepository {
     );
   }
 
-  // Future<void> register(String username, String password, String email) async {
-  //   return setTokens(
-  //     await _provider.register(username, password, email),
-  //   );
-  // }
-
   Future<void> loginWithRefreshToken() async {
     return setOauthTokens(
       await _provider.loginWithRefreshToken(),
     );
   }
-
-  // Future<void> logoutFromAllDevices() async {
-  //   return setTokens(await _provider.logoutFromAllDevices());
-  // }
 
   Future<void> recover(String email) {
     return _provider.recover(email);
@@ -86,6 +77,10 @@ class AuthRepository {
 
   Future<void> setUser(String? user) {
     return _storage.write(key: 'user', value: user);
+  }
+
+  Future<void> deleteUser() {
+    return _storage.delete(key: 'user');
   }
 
   Future<void> deleteAccessToken() {

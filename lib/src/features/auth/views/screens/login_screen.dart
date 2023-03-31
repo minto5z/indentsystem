@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
-import 'package:indentsystem/src/features/auth/views/screens/recover_screen.dart';
 import 'package:indentsystem/src/features/home/views/screens/home_screen.dart';
-import 'package:indentsystem/src/shared/views/widgets/circles_background.dart';
-import 'package:indentsystem/src/shared/views/widgets/main_text_field.dart';
-import 'package:indentsystem/src/shared/views/widgets/next_button.dart';
-import 'package:indentsystem/src/shared/views/widgets/scrollable_form.dart';
-import 'package:indentsystem/src/shared/views/widgets/underlined_button.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,118 +17,178 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _passwordController = TextEditingController();
-
-  String _login_id = '';
+  String _email = '';
+  String _password = '';
   bool _loading = false;
+
+  bool _obscureText = true;
+  IconData _iconVisible = Icons.visibility_off;
+  final Color _gradientTop = const Color(0xFF039be6);
+  final Color _gradientBottom = const Color(0xFF0299e2);
+  final Color _mainColor = const Color(0xFF0181cc);
+  final Color _underlineColor = const Color(0xFFCCCCCC);
+
+  void _toggleObscureText() {
+    setState(() {
+      _obscureText = !_obscureText;
+      if (_obscureText == true) {
+        _iconVisible = Icons.visibility_off;
+      } else {
+        _iconVisible = Icons.visibility;
+      }
+    });
+  }
 
   @override
   void dispose() {
     super.dispose();
-
-    _passwordController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    final node = FocusScope.of(context);
-
     return Scaffold(
-      body: CirclesBackground(
-        backgroundColor: Colors.white,
-        topSmallCircleColor: theme.secondaryHeaderColor,
-        topMediumCircleColor: theme.primaryColor,
-        topRightCircleColor: theme.highlightColor,
-        bottomRightCircleColor: Colors.white,
-        child: Stack(
-          children: [
-            //const GoBackButton(),
-            Column(
-              children: [
-                ScrollableForm(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  children: [
-                    const SizedBox(
-                      height: 90,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 250),
-                          child: const Text(
-                            'Welcome Back',
+      body: Stack(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height / 3.5,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [_gradientTop, _gradientBottom],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter)),
+          ),
+          Container(
+              margin: EdgeInsets.fromLTRB(
+                  0, MediaQuery.of(context).size.height / 20, 0, 0),
+              alignment: Alignment.topCenter,
+              child: Image.asset('assets/images/logo_indent_system.png',
+                  width: 200, height: 120)),
+          ListView(
+            children: <Widget>[
+              // create form login
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                elevation: 5,
+                margin: EdgeInsets.fromLTRB(
+                    32, MediaQuery.of(context).size.height / 3.5 - 72, 32, 0),
+                color: Colors.white,
+                child: Container(
+                    margin: const EdgeInsets.fromLTRB(24, 0, 24, 20),
+                    child: Column(
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Center(
+                          child: Text(
+                            'SIGN IN',
                             style: TextStyle(
-                              fontSize: 46,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                                color: _mainColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextField(
+                          keyboardType: TextInputType.emailAddress,
+                          onChanged: (value) => setState(() {
+                            _email = value;
+                          }),
+                          decoration: InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey[600]!)),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: _underlineColor),
+                              ),
+                              labelText: 'Email',
+                              labelStyle: TextStyle(color: Colors.grey[700])),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextField(
+                          obscureText: _obscureText,
+                          decoration: InputDecoration(
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey[600]!)),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: _underlineColor),
+                            ),
+                            labelText: 'Password',
+                            labelStyle: TextStyle(color: Colors.grey[700]),
+                            suffixIcon: IconButton(
+                                icon: Icon(_iconVisible,
+                                    color: Colors.grey[700], size: 20),
+                                onPressed: () {
+                                  _toggleObscureText();
+                                }),
+                          ),
+                          onChanged: (value) => setState(() {
+                            _password = value;
+                          }),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: GestureDetector(
+                            onTap: () {
+                              Fluttertoast.showToast(
+                                  msg: 'Click forgot password',
+                                  toastLength: Toast.LENGTH_SHORT);
+                            },
+                            child: const Text(
+                              'Forgot Password?',
+                              style: TextStyle(fontSize: 13),
                             ),
                           ),
                         ),
                         const SizedBox(
-                          height: 70,
+                          height: 40,
                         ),
-                        _form(node, context),
+                        SizedBox(
+                          width: double.maxFinite,
+                          child: TextButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.resolveWith<Color>(
+                                  (Set<MaterialState> states) => _mainColor,
+                                ),
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                              ),
+                              onPressed: () {
+                                _login(context);
+                                //Fluttertoast.showToast(msg: 'Click login', toastLength: Toast.LENGTH_SHORT);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 5),
+                                child: Text(
+                                  'LOGIN',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                  textAlign: TextAlign.center,
+                                ),
+                              )),
+                        ),
                       ],
-                    ),
-                  ],
-                ),
-                const _FooterButtons(),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _form(FocusScopeNode node, BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        MainTextField(
-          label: 'LoginId',
-          loginidField: true,
-          onChanged: (value) => setState(() {
-            _login_id = value;
-          }),
-          onEditingComplete: () => node.nextFocus(),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        MainTextField(
-          label: 'Password',
-          controller: _passwordController,
-          passwordField: true,
-          onSubmitted: (_) {
-            node.unfocus();
-
-            _login(context);
-          },
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            const Text(
-              'Sign In',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
+                    )),
               ),
-            ),
-            const Spacer(),
-            NextButton(
-              onPressed: () => _login(context),
-              loading: _loading,
-            )
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -143,8 +198,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _loginWith(
       context,
       () => bloc.authenticate(
-        _login_id,
-        _passwordController.text,
+        _email,
+        _password,
       ),
     );
   }
@@ -170,33 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
         _loading = false;
       });
 
-      _passwordController.text = '';
+      // _passwordController.text = '';
     }
-  }
-}
-
-class _FooterButtons extends StatelessWidget {
-  const _FooterButtons({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: Row(
-        children: [
-          const Spacer(),
-          UnderlinedButton(
-            onPressed: () => Navigator.pushNamed(
-              context,
-              RecoverScreen.routeName,
-            ),
-            color: theme.secondaryHeaderColor,
-            child: const Text('Forgot Password'),
-          )
-        ],
-      ),
-    );
   }
 }
