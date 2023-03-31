@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:indentsystem/src/features/auth/views/screens/login_screen.dart';
-import 'package:indentsystem/src/features/auth/views/screens/register_screen.dart';
 import 'package:indentsystem/src/shared/views/widgets/circles_background.dart';
 import 'package:indentsystem/src/shared/views/widgets/underlined_button.dart';
 
@@ -72,7 +71,7 @@ class NonAuthenticatedHome extends StatelessWidget {
                   color: theme.highlightColor,
                   onPressed: () => Navigator.pushNamed(
                     context,
-                    RegisterScreen.routeName,
+                    LoginScreen.routeName,
                   ),
                   child: const Text('Sign Up'),
                 ),

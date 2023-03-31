@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
 import 'package:indentsystem/src/features/auth/views/screens/login_screen.dart';
-import 'package:indentsystem/src/features/auth/views/screens/register_screen.dart';
 import 'package:indentsystem/src/shared/views/widgets/circles_background.dart';
 import 'package:indentsystem/src/shared/views/widgets/dialog/alert_dialog_widget.dart';
 import 'package:indentsystem/src/shared/views/widgets/go_back_button.dart';
@@ -179,7 +178,7 @@ class _FooterButtons extends StatelessWidget {
             color: theme.highlightColor,
             onPressed: () => Navigator.pushNamed(
               context,
-              RegisterScreen.routeName,
+              RecoverScreen.routeName,
             ),
           ),
         ],

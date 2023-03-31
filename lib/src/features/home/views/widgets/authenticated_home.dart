@@ -5,7 +5,7 @@ import 'package:indentsystem/src/features/settings/views/screens/settings_screen
 import 'package:indentsystem/src/shared/views/widgets/underlined_button.dart';
 import 'package:provider/provider.dart';
 
-import '../../../auth/logic/models/LoginResponse.dart';
+import '../../../auth/logic/models/login_response.dart';
 
 class AuthenticatedHome extends StatelessWidget {
   final UserInfo user;

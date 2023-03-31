@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indentsystem/src/features/auth/logic/cubit/auth_cubit.dart';
-import 'package:indentsystem/src/features/auth/logic/models/LoginResponse.dart';
+import 'package:indentsystem/src/features/auth/logic/models/login_response.dart';
 import 'package:indentsystem/src/features/settings/logic/settings_repository.dart';
 import 'package:indentsystem/src/shared/views/widgets/dialog/alert_dialog_widget.dart';
 import 'package:indentsystem/src/shared/views/widgets/dialog/confirm_dialog_widget.dart';

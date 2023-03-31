@@ -1,13 +1,10 @@
 import 'dart:io';
 
 import 'package:indentsystem/src/features/auth/logic/interceptors/auth_token_interceptor.dart';
-import 'package:indentsystem/src/features/auth/logic/models/LoginResponse.dart';
-import 'package:indentsystem/src/features/auth/logic/models/tokens.dart';
-import 'package:indentsystem/src/features/auth/logic/models/user.dart';
+import 'package:indentsystem/src/features/auth/logic/models/login_response.dart';
 import 'package:indentsystem/src/shared/logic/http/api.dart';
-import 'package:indentsystem/src/shared/logic/http/interceptors/error_dialog_interceptor.dart';
 
-import '../models/OauthResponse.dart';
+import '../models/oauth_response.dart';
 
 class AuthAPIProvider {
   Future<LoginResponse> authenticate(String username, String password) async {
@@ -43,25 +40,6 @@ class AuthAPIProvider {
     return tokens;
   }
 
-  Future<Tokens> register(
-    String username,
-    String password,
-    String email,
-  ) async {
-    final response = await api.post(
-      '/auth/register',
-      data: {
-        'username': username,
-        'password': password,
-        'email': email,
-      },
-    );
-
-    final tokens = Tokens.fromJson(response.data);
-
-    return tokens;
-  }
-
   Future<void> recover(String email) async {
     await api.post(
       '/recover',
@@ -69,19 +47,6 @@ class AuthAPIProvider {
         'email': email,
       },
     );
-  }
-
-  Future<User?> getProfile() async {
-    final response = await api.get(
-      '/auth/me',
-      options: Options(
-        headers: {
-          ErrorDialogInterceptor.skipHeader: true,
-        },
-      ),
-    );
-
-    return User.fromJson(response.data);
   }
 
   Future<OauthResponse> loginWithRefreshToken() async {
@@ -96,11 +61,5 @@ class AuthAPIProvider {
     );
 
     return OauthResponse.fromJson(response.data);
-  }
-
-  Future<Tokens> logoutFromAllDevices() async {
-    final response = await api.delete('/auth/logout-from-all-devices');
-
-    return Tokens.fromJson(response.data);
   }
 }

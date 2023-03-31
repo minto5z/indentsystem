@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as store;
-import 'package:indentsystem/src/features/auth/logic/models/LoginResponse.dart';
+import 'package:indentsystem/src/features/auth/logic/models/login_response.dart';
 import 'package:indentsystem/src/features/auth/logic/provider/auth_api_provider.dart';
 
-import '../models/OauthResponse.dart';
+import '../models/oauth_response.dart';
 
 class AuthRepository {
   final _provider = AuthAPIProvider();

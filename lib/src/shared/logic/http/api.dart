@@ -6,8 +6,8 @@ import 'package:indentsystem/src/shared/logic/http/interceptors/error_dialog_int
 export 'package:dio/dio.dart';
 
 Dio _createHttpClient() {
-  final api = new Dio(
-    new BaseOptions(
+  final api = Dio(
+    BaseOptions(
       baseUrl: environments.api,
       contentType: Headers.jsonContentType,
       responseType: ResponseType.json,
@@ -15,8 +15,8 @@ Dio _createHttpClient() {
   );
 
   api
-    ..interceptors.add(new ErrorDialogInterceptor())
-    ..interceptors.add(new AuthTokenInterceptor(api));
+    ..interceptors.add(ErrorDialogInterceptor())
+    ..interceptors.add(AuthTokenInterceptor(api));
 
   return api;
 }

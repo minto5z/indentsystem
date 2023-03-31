@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
 
-import '../models/LoginResponse.dart';
+import '../models/login_response.dart';
 
 class AuthCubit extends Cubit<UserInfo?> {
   AuthRepository authRepository;
