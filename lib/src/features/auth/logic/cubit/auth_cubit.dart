@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:indentsystem/src/features/auth/logic/repository/auth_repository.dart';
-import 'package:indentsystem/src/features/notification/logic/repository/notification_repository.dart';
 
 import '../models/LoginResponse.dart';
 
@@ -31,8 +30,6 @@ class AuthCubit extends Cubit<UserInfo?> {
     emit(null);
 
     await authRepository.logout();
-
-    await notificationRepository.deleteSubscription();
   }
 
   Future<void> updateProfile() async {
