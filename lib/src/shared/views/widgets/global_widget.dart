@@ -32,19 +32,53 @@ class GlobalWidget {
     Icons.whatshot
   ];
 
+  // PreferredSizeWidget globalAppBar(BuildContext context) {
+  //   return AppBar(
+  //       centerTitle: true,
+  //       systemOverlayStyle: SystemUiOverlayStyle.light,
+  //       title: Image.asset('assets/images/logo_indent_system.png',
+  //           height: 24, color: Colors.white),
+  //       backgroundColor: _getColor(),
+  //       leading: IconButton(
+  //           icon: const Icon(Icons.help_outline),
+  //           onPressed: () {
+  //             Fluttertoast.showToast(
+  //                 msg: 'Click about us', toastLength: Toast.LENGTH_SHORT);
+  //           }),
+  //       actions: <Widget>[
+  //         IconButton(
+  //             icon: customNotifIcon(count: 8, notifColor: Colors.white),
+  //             onPressed: () {
+  //               Fluttertoast.showToast(
+  //                   msg: 'Click notification', toastLength: Toast.LENGTH_SHORT);
+  //             }),
+  //         IconButton(
+  //             icon: const Icon(Icons.settings),
+  //             onPressed: () {
+  //               Navigator.of(context).pushNamedAndRemoveUntil(
+  //                 SettingsScreen.routeName,
+  //                 (route) => false,
+  //               );
+  //             })
+  //       ]);
+  // }
+
   PreferredSizeWidget globalAppBar(BuildContext context) {
     return AppBar(
-        centerTitle: true,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-        title: Image.asset('assets/images/logo_indent_system.png',
-            height: 24, color: Colors.white),
+        iconTheme: const IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+        elevation: 0,
         backgroundColor: _getColor(),
-        leading: IconButton(
-            icon: const Icon(Icons.help_outline),
-            onPressed: () {
-              Fluttertoast.showToast(
-                  msg: 'Click about us', toastLength: Toast.LENGTH_SHORT);
-            }),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        centerTitle: true,
+        title: Image.asset('assets/images/logo_indent_system.png', height: 24),
+        bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1.0),
+            child: Container(
+              color: Colors.grey[100],
+              height: 1.0,
+            )),
         actions: <Widget>[
           IconButton(
               icon: customNotifIcon(count: 8, notifColor: Colors.white),

@@ -114,6 +114,36 @@ class _Home1PageState extends State<AuthenticatedHome> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: _globalWidget.globalAppBar(context),
+        drawer: Drawer(
+            child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text(widget.user.email!),
+              accountEmail: Text(widget.user.email!),
+              currentAccountPicture: const CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Text("A", style: TextStyle(fontSize: 40.0)),
+              ),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              trailing: const Icon(Icons.arrow_forward),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text('Item 2'),
+              leading: const Icon(Icons.arrow_forward),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text('Close this drawer'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )),
         body: ListView(
           children: [_buildTop(), _buildHomeBanner(), _createMenu()],
         ));
