@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:indentsystem/src/features/auth/views/screens/login_screen.dart';
+import 'package:indentsystem/src/features/contacts/views/contact_screen.dart';
 
 import '../../../../shared/views/widgets/cache_image_network.dart';
 import '../../../../shared/views/widgets/global_widget.dart';
@@ -57,7 +58,7 @@ class _Home1PageState extends State<AuthenticatedHome> {
 
     _categoryData.add(CategoryModel(
         id: 1,
-        name: 'Outlet Store',
+        name: 'Contacts Page',
         image:
             'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
     _categoryData.add(CategoryModel(
@@ -309,10 +310,19 @@ class _Home1PageState extends State<AuthenticatedHome> {
       children: List.generate(_categoryData.length, (index) {
         return GestureDetector(
             onTap: () {
-              Fluttertoast.showToast(
-                  msg:
-                      'Click ${_categoryData[index].name.replaceAll('\n', ' ')}',
-                  toastLength: Toast.LENGTH_SHORT);
+              if(index==0){
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  ContactScreen.routeName,
+                      (route) => false,
+                );
+              }else{
+                Fluttertoast.showToast(
+                    msg:
+                    'Click ${_categoryData[index].name.replaceAll('\n', ' ')}',
+                    toastLength: Toast.LENGTH_SHORT);
+              }
+
+
             },
             child: Container(
               decoration: BoxDecoration(

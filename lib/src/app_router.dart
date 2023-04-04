@@ -4,6 +4,8 @@ import 'package:indentsystem/src/features/auth/views/screens/recover_screen.dart
 import 'package:indentsystem/src/features/home/views/screens/home_screen.dart';
 import 'package:indentsystem/src/features/settings/views/screens/settings_screen.dart';
 
+import 'features/contacts/views/contact_screen.dart';
+
 class AppRouter {
   Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -15,6 +17,8 @@ class AppRouter {
         return RecoverScreen.route();
       case SettingsScreen.routeName:
         return SettingsScreen.route();
+      case ContactScreen.routeName:
+        return ContactScreen.route();
       default:
         return HomeScreen.route();
     }
