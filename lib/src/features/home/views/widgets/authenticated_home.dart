@@ -310,19 +310,17 @@ class _Home1PageState extends State<AuthenticatedHome> {
       children: List.generate(_categoryData.length, (index) {
         return GestureDetector(
             onTap: () {
-              if(index==0){
+              if (index == 0) {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   ContactScreen.routeName,
-                      (route) => false,
+                  (route) => false,
                 );
-              }else{
+              } else {
                 Fluttertoast.showToast(
                     msg:
-                    'Click ${_categoryData[index].name.replaceAll('\n', ' ')}',
+                        'Click ${_categoryData[index].name.replaceAll('\n', ' ')}',
                     toastLength: Toast.LENGTH_SHORT);
               }
-
-
             },
             child: Container(
               decoration: BoxDecoration(

@@ -2,10 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:indentsystem/src/features/settings/views/screens/settings_screen.dart';
-
-import '../../../constants/constant.dart';
 
 class GlobalWidget {
   Random _random = Random();
@@ -32,44 +29,12 @@ class GlobalWidget {
     Icons.whatshot
   ];
 
-  // PreferredSizeWidget globalAppBar(BuildContext context) {
-  //   return AppBar(
-  //       centerTitle: true,
-  //       systemOverlayStyle: SystemUiOverlayStyle.light,
-  //       title: Image.asset('assets/images/logo_indent_system.png',
-  //           height: 24, color: Colors.white),
-  //       backgroundColor: _getColor(),
-  //       leading: IconButton(
-  //           icon: const Icon(Icons.help_outline),
-  //           onPressed: () {
-  //             Fluttertoast.showToast(
-  //                 msg: 'Click about us', toastLength: Toast.LENGTH_SHORT);
-  //           }),
-  //       actions: <Widget>[
-  //         IconButton(
-  //             icon: customNotifIcon(count: 8, notifColor: Colors.white),
-  //             onPressed: () {
-  //               Fluttertoast.showToast(
-  //                   msg: 'Click notification', toastLength: Toast.LENGTH_SHORT);
-  //             }),
-  //         IconButton(
-  //             icon: const Icon(Icons.settings),
-  //             onPressed: () {
-  //               Navigator.of(context).pushNamedAndRemoveUntil(
-  //                 SettingsScreen.routeName,
-  //                 (route) => false,
-  //               );
-  //             })
-  //       ]);
-  // }
-
   PreferredSizeWidget globalAppBar(BuildContext context) {
+    final theme = Theme.of(context);
     return AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black, //change your color here
-        ),
+        iconTheme: theme.primaryIconTheme,
         elevation: 0,
-        backgroundColor: _getColor(),
+        backgroundColor: theme.primaryColor,
         systemOverlayStyle: SystemUiOverlayStyle.light,
         centerTitle: true,
         title: Image.asset('assets/images/logo_indent_system.png', height: 24),
@@ -80,12 +45,12 @@ class GlobalWidget {
               height: 1.0,
             )),
         actions: <Widget>[
-          IconButton(
-              icon: customNotifIcon(count: 8, notifColor: Colors.white),
-              onPressed: () {
-                Fluttertoast.showToast(
-                    msg: 'Click notification', toastLength: Toast.LENGTH_SHORT);
-              }),
+          // IconButton(
+          //     icon: customNotifIcon(count: 8, notifColor: Colors.white),
+          //     onPressed: () {
+          //       Fluttertoast.showToast(
+          //           msg: 'Click notification', toastLength: Toast.LENGTH_SHORT);
+          //     }),
           IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () {
@@ -177,9 +142,9 @@ class GlobalWidget {
                 SizedBox(width: 24),
                 Expanded(
                   child: Text(title,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 16,
-                          color: BLACK55,
+                          color: Colors.black54,
                           fontWeight: FontWeight.w500)),
                 ),
                 Icon(Icons.chevron_right, size: 30, color: _color),
@@ -199,21 +164,25 @@ class GlobalWidget {
         Container(
           child: Text(title,
               style: TextStyle(
-                  fontSize: 18, color: BLACK21, fontWeight: FontWeight.w500)),
+                  fontSize: 18,
+                  color: Colors.black26,
+                  fontWeight: FontWeight.w500)),
         ),
         Container(
           margin: EdgeInsets.only(top: 8),
           child: Container(
             child: Text(desc,
                 style: TextStyle(
-                    fontSize: 15, color: BLACK77, letterSpacing: 0.5)),
+                    fontSize: 15, color: Colors.black87, letterSpacing: 0.5)),
           ),
         ),
         Container(
           margin: EdgeInsets.only(top: 24, bottom: 8),
           child: Text('Example',
               style: TextStyle(
-                  fontSize: 18, color: BLACK21, fontWeight: FontWeight.w500)),
+                  fontSize: 18,
+                  color: Colors.black26,
+                  fontWeight: FontWeight.w500)),
         ),
       ],
     );
@@ -228,7 +197,9 @@ class GlobalWidget {
         Container(
           child: Text(title,
               style: TextStyle(
-                  fontSize: 18, color: BLACK21, fontWeight: FontWeight.w500)),
+                  fontSize: 18,
+                  color: Colors.black26,
+                  fontWeight: FontWeight.w500)),
         ),
         Container(
           margin: EdgeInsets.only(top: 24),
@@ -239,13 +210,15 @@ class GlobalWidget {
                   child: Container(
                     child: Text(desc,
                         style: TextStyle(
-                            fontSize: 15, color: BLACK77, letterSpacing: 0.5)),
+                            fontSize: 15,
+                            color: Colors.black87,
+                            letterSpacing: 0.5)),
                   )),
               Flexible(
                   flex: 2,
                   child: Container(
                       alignment: Alignment.center,
-                      child: Icon(icon, size: 50, color: SOFT_BLUE)))
+                      child: Icon(icon, size: 50, color: Colors.blueAccent)))
             ],
           ),
         ),
@@ -253,7 +226,9 @@ class GlobalWidget {
           margin: EdgeInsets.only(top: 24, bottom: 16),
           child: Text('Example',
               style: TextStyle(
-                  fontSize: 18, color: BLACK21, fontWeight: FontWeight.w500)),
+                  fontSize: 18,
+                  color: Colors.black26,
+                  fontWeight: FontWeight.w500)),
         ),
       ],
     );
@@ -290,7 +265,7 @@ class GlobalWidget {
     return Container(
       padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
       decoration: BoxDecoration(
-          color: SOFT_BLUE, borderRadius: BorderRadius.circular(2)),
+          color: Colors.lightBlue, borderRadius: BorderRadius.circular(2)),
       child: Row(
         children: [
           Text('Default', style: TextStyle(color: Colors.white, fontSize: 13)),
@@ -406,7 +381,7 @@ class GlobalWidget {
               width: 20,
               margin: const EdgeInsets.all(5),
               child: const CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(PRIMARY_COLOR),
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.purple),
                 strokeWidth: 2.0,
               ),
             ),

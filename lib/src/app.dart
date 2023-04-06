@@ -10,7 +10,9 @@ final GlobalKey<NavigatorState> applicationKey = GlobalKey();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey();
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  final ThemeData theme;
+
+  MyApp({Key? key, required this.theme}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -35,18 +37,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         initialRoute: HomeScreen.routeName,
         onGenerateRoute: appRouter.onGenerateRoute,
-        theme: ThemeData.light().copyWith(
-          colorScheme: ColorScheme.light().copyWith(
-            primary: Color(0xff4C525C),
-            secondary: Color(0xff4C525C),
-            background: Color(0xff4C525C),
-          ),
-          appBarTheme: AppBarTheme(elevation: 0),
-          primaryColor: Color(0xff4C525C),
-          secondaryHeaderColor: Color(0xffFFAE48),
-          highlightColor: Color(0xff58BFE6),
-          indicatorColor: Color(0xff4C525C),
-        ),
+        theme: widget.theme,
       ),
     );
   }

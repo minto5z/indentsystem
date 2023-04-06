@@ -23,10 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _obscureText = true;
   IconData _iconVisible = Icons.visibility_off;
-  final Color _gradientTop = const Color(0xFF039be6);
-  final Color _gradientBottom = const Color(0xFF0299e2);
-  final Color _mainColor = const Color(0xFF0181cc);
-  final Color _underlineColor = const Color(0xFFCCCCCC);
 
   void _toggleObscureText() {
     setState(() {
@@ -46,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -53,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: MediaQuery.of(context).size.height / 3.5,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [_gradientTop, _gradientBottom],
+                    colors: [theme.primaryColor, theme.primaryColorDark],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter)),
           ),
@@ -85,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             'SIGN IN',
                             style: TextStyle(
-                                color: _mainColor,
+                                color: theme.primaryColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w900),
                           ),
@@ -103,7 +100,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   borderSide:
                                       BorderSide(color: Colors.grey[600]!)),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: _underlineColor),
+                                borderSide:
+                                    BorderSide(color: theme.primaryColorDark),
                               ),
                               labelText: 'Email',
                               labelStyle: TextStyle(color: Colors.grey[700])),
@@ -118,7 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderSide:
                                     BorderSide(color: Colors.grey[600]!)),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: _underlineColor),
+                              borderSide:
+                                  BorderSide(color: theme.primaryColorDark),
                             ),
                             labelText: 'Password',
                             labelStyle: TextStyle(color: Colors.grey[700]),
@@ -159,7 +158,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) => _mainColor,
+                                  (Set<MaterialState> states) =>
+                                      theme.primaryColor,
                                 ),
                                 overlayColor: MaterialStateProperty.all(
                                     Colors.transparent),

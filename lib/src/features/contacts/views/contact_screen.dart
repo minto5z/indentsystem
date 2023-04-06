@@ -4,7 +4,9 @@ import '../../../shared/views/widgets/global_widget.dart';
 
 class ContactScreen extends StatefulWidget {
   static const routeName = '/contact';
+
   static route() => MaterialPageRoute(builder: (_) => ContactScreen());
+
   const ContactScreen({super.key});
 
   @override
@@ -36,34 +38,34 @@ class _ContactScreenState extends State<ContactScreen> {
         appBar: _globalWidget.globalAppBar(context),
         drawer: Drawer(
             child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                const UserAccountsDrawerHeader(
-                  accountName: Text('widget.user.email!'),
-                  accountEmail: Text('widget.user.email!'),
-                  currentAccountPicture: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Text("A", style: TextStyle(fontSize: 40.0)),
-                  ),
-                ),
-                ListTile(
-                  title: const Text('Item 1'),
-                  trailing: const Icon(Icons.arrow_forward),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: const Text('Item 2'),
-                  leading: const Icon(Icons.arrow_forward),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: const Text('Close this drawer'),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            )),
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const UserAccountsDrawerHeader(
+              accountName: Text('widget.user.email!'),
+              accountEmail: Text('widget.user.email!'),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Text("A", style: TextStyle(fontSize: 40.0)),
+              ),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              trailing: const Icon(Icons.arrow_forward),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text('Item 2'),
+              leading: const Icon(Icons.arrow_forward),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text('Close this drawer'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )),
         body: AnimatedList(
           // Key to call remove and insert item methods from anywhere
           key: _listKey,
@@ -75,11 +77,8 @@ class _ContactScreenState extends State<ContactScreen> {
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           backgroundColor: Colors.blue,
-          onPressed: (){
-            
-          },
-        )
-    );
+          onPressed: () {},
+        ));
   }
 
   Widget _buildItem(String item, Animation<double> animation, int index) {
@@ -99,8 +98,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 Icons.remove_circle,
                 color: Colors.red,
               ),
-              onTap: (){
-              },
+              onTap: () {},
             ),
           ),
         ),
