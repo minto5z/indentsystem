@@ -27,7 +27,7 @@ jobs:
 #      - run: flutter pub run flutter_app_name
       - run: flutter pub run flutter_launcher_icons:main
       #- run: flutter test
-      - run: flutter build apk --target-platform=android-arm
+      - run: flutter build apk --target-platform=android-arm --split-per-abi --no-tree-shake-icons
       #- run: |
       #    flutter build ios --no-codesign
       #    cd build/ios/iphoneos
