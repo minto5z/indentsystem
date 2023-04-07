@@ -56,7 +56,7 @@ class GlobalWidget {
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   SettingsScreen.routeName,
-                  (route) => false,
+                  (route) => true,
                 );
               })
         ]);

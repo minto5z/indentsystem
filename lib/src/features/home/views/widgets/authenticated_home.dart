@@ -25,9 +25,6 @@ class _Home1PageState extends State<AuthenticatedHome> {
   // initialize global widget
   final _globalWidget = GlobalWidget();
 
-  final Color _color1 = const Color(0xFF005288);
-  final Color _color2 = const Color(0xFF37474f);
-
   int _currentImageSlider = 0;
 
   List<BannerSliderModel> _bannerData = [];
@@ -76,31 +73,6 @@ class _Home1PageState extends State<AuthenticatedHome> {
         name: 'Apply for Credit',
         image:
             'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
-    _categoryData.add(CategoryModel(
-        id: 5,
-        name: 'Credit\nApplication\nStatus',
-        image:
-            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
-    _categoryData.add(CategoryModel(
-        id: 6,
-        name: 'Credit Payment',
-        image:
-            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
-    _categoryData.add(CategoryModel(
-        id: 7,
-        name: 'Commission',
-        image:
-            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
-    _categoryData.add(CategoryModel(
-        id: 8,
-        name: 'Check Point',
-        image:
-            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
-    _categoryData.add(CategoryModel(
-        id: 9,
-        name: 'Contact Us',
-        image:
-            'https://cdn.dribbble.com/users/4009983/screenshots/16047199/media/5ebee3eea85f65f654414699c4a75f00.jpg'));
 
     super.initState();
   }
@@ -146,11 +118,12 @@ class _Home1PageState extends State<AuthenticatedHome> {
           ],
         )),
         body: ListView(
-          children: [_buildTop(), _buildHomeBanner(), _createMenu()],
+          children: [_buildTop(context), _buildHomeBanner(), _createMenu(context)],
         ));
   }
 
-  Widget _buildTop() {
+  Widget _buildTop(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(20),
       child: Row(
@@ -185,7 +158,7 @@ class _Home1PageState extends State<AuthenticatedHome> {
                     child: Text(
                       widget.user.email!,
                       style: TextStyle(
-                          color: _color2,
+                          color: theme.primaryColorDark,
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
                       maxLines: 1,
@@ -208,12 +181,12 @@ class _Home1PageState extends State<AuthenticatedHome> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.star, color: _color2, size: 12),
+                            Icon(Icons.star, color: theme.primaryColorDark, size: 12),
                             const SizedBox(width: 4),
                             Text('platinum member',
                                 maxLines: 1,
                                 style: TextStyle(
-                                    color: _color2,
+                                    color: theme.primaryColorDark,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 9))
                           ],
@@ -240,7 +213,7 @@ class _Home1PageState extends State<AuthenticatedHome> {
               );
             },
             child: Text('Log Out',
-                style: TextStyle(color: _color2, fontWeight: FontWeight.bold)),
+                style: TextStyle(color: theme.primaryColorDark, fontWeight: FontWeight.bold)),
           )
         ],
       ),
@@ -300,20 +273,21 @@ class _Home1PageState extends State<AuthenticatedHome> {
     );
   }
 
-  Widget _createMenu() {
+  Widget _createMenu(BuildContext context) {
+    final theme = Theme.of(context);
     return GridView.count(
       childAspectRatio: 1.1,
       shrinkWrap: true,
       crossAxisSpacing: 0,
       mainAxisSpacing: 0,
-      crossAxisCount: 3,
+      crossAxisCount: 2,
       children: List.generate(_categoryData.length, (index) {
         return GestureDetector(
             onTap: () {
               if (index == 0) {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   ContactScreen.routeName,
-                  (route) => false,
+                  (route) => true,
                 );
               } else {
                 Fluttertoast.showToast(
@@ -322,33 +296,36 @@ class _Home1PageState extends State<AuthenticatedHome> {
                     toastLength: Toast.LENGTH_SHORT);
               }
             },
-            child: Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[100]!, width: 0.5),
-                  color: Colors.white),
-              padding: const EdgeInsets.all(8),
-              child: Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                    buildCacheNetworkImage(
-                        width: 40,
-                        height: 40,
-                        url: _categoryData[index].image,
-                        plColor: Colors.transparent),
-                    Container(
-                      margin: const EdgeInsets.only(top: 12),
-                      child: Text(
-                        _categoryData[index].name,
-                        style: TextStyle(
-                          color: _color1,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 11,
+            child: Card(
+              elevation: 10,
+              child: Container(
+                // decoration: BoxDecoration(
+                //     border: Border.all(color: Colors.grey[100]!, width: 0.5),
+                //     color: Colors.white),
+                padding: const EdgeInsets.all(4),
+                child: Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                      buildCacheNetworkImage(
+                          width: 40,
+                          height: 40,
+                          url: _categoryData[index].image,
+                          plColor: Colors.transparent),
+                      Container(
+                        margin: const EdgeInsets.only(top: 12),
+                        child: Text(
+                          _categoryData[index].name,
+                          style: TextStyle(
+                            color: theme.primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 11,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                  ])),
+                      )
+                    ])),
+              ),
             ));
       }),
     );
