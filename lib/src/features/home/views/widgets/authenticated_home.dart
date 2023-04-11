@@ -87,38 +87,13 @@ class _Home1PageState extends State<AuthenticatedHome> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: _globalWidget.globalAppBar(context),
-        drawer: Drawer(
-            child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text(widget.user.email!),
-              accountEmail: Text(widget.user.email!),
-              currentAccountPicture: const CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Text("A", style: TextStyle(fontSize: 40.0)),
-              ),
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              trailing: const Icon(Icons.arrow_forward),
-              onTap: () {},
-            ),
-            ListTile(
-              title: const Text('Item 2'),
-              leading: const Icon(Icons.arrow_forward),
-              onTap: () {},
-            ),
-            ListTile(
-              title: const Text('Close this drawer'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        )),
+        drawer: _globalWidget.globalDrawer(context),
         body: ListView(
-          children: [_buildTop(context), _buildHomeBanner(), _createMenu(context)],
+          children: [
+            _buildTop(context),
+            _buildHomeBanner(),
+            _createMenu(context)
+          ],
         ));
   }
 
@@ -181,7 +156,8 @@ class _Home1PageState extends State<AuthenticatedHome> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.star, color: theme.primaryColorDark, size: 12),
+                            Icon(Icons.star,
+                                color: theme.primaryColorDark, size: 12),
                             const SizedBox(width: 4),
                             Text('platinum member',
                                 maxLines: 1,
@@ -213,7 +189,9 @@ class _Home1PageState extends State<AuthenticatedHome> {
               );
             },
             child: Text('Log Out',
-                style: TextStyle(color: theme.primaryColorDark, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    color: theme.primaryColorDark,
+                    fontWeight: FontWeight.bold)),
           )
         ],
       ),

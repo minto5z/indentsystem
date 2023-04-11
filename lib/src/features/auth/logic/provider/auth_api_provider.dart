@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:indentsystem/src/features/auth/logic/interceptors/auth_token_interceptor.dart';
 import 'package:indentsystem/src/features/auth/logic/models/login_response.dart';
 import 'package:indentsystem/src/shared/logic/http/api.dart';
 
 import '../../../../constants/environments.dart';
+import '../../../../shared/logic/http/exception_state.dart';
 import '../models/oauth_response.dart';
 
 class AuthAPIProvider {
@@ -26,15 +26,13 @@ class AuthAPIProvider {
         data: oformData,
         options: Options(headers: {AuthTokenInterceptor.skipHeader: true}),
       );
-
-      otokens = OauthResponse.fromJson(oauth.data).accessToken;
-    } on DioError catch (e) {
-      if (e.response?.statusCode == 404) {
-        Fluttertoast.showToast(
-            msg: '{$e.response?.statusCode}', toastLength: Toast.LENGTH_SHORT);
+      if (oauth.statusCode == 200) {
+        otokens = OauthResponse.fromJson(oauth.data).accessToken;
       } else {
-        Fluttertoast.showToast(msg: e.message, toastLength: Toast.LENGTH_SHORT);
+        throw GenericHttpException();
       }
+    } on SocketException {
+      throw NoConnectionException();
     }
     var tokens;
     try {
@@ -48,15 +46,13 @@ class AuthAPIProvider {
         ),
         data: formData,
       );
-
-      tokens = LoginResponse.fromJson(response.data);
-    } on DioError catch (e) {
-      if (e.response?.statusCode == 404) {
-        Fluttertoast.showToast(
-            msg: '{$e.response?.statusCode}', toastLength: Toast.LENGTH_SHORT);
+      if (response.statusCode == 200) {
+        tokens = LoginResponse.fromJson(response.data);
       } else {
-        Fluttertoast.showToast(msg: e.message, toastLength: Toast.LENGTH_SHORT);
+        throw GenericHttpException();
       }
+    } on SocketException {
+      throw NoConnectionException();
     }
     return tokens;
   }
@@ -82,14 +78,14 @@ class AuthAPIProvider {
         },
         options: Options(headers: {AuthTokenInterceptor.skipHeader: true}),
       );
-      tokens = OauthResponse.fromJson(response.data);
-    } on DioError catch (e) {
-      if (e.response?.statusCode == 404) {
-        Fluttertoast.showToast(
-            msg: '{$e.response?.statusCode}', toastLength: Toast.LENGTH_SHORT);
+
+      if (response.statusCode == 200) {
+        tokens = OauthResponse.fromJson(response.data);
       } else {
-        Fluttertoast.showToast(msg: e.message, toastLength: Toast.LENGTH_SHORT);
+        throw GenericHttpException();
       }
+    } on SocketException {
+      throw NoConnectionException();
     }
     return tokens;
   }

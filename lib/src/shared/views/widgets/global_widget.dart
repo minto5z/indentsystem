@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:indentsystem/src/features/home/views/screens/home_screen.dart';
 import 'package:indentsystem/src/features/settings/views/screens/settings_screen.dart';
 
 class GlobalWidget {
@@ -60,6 +61,44 @@ class GlobalWidget {
                 );
               })
         ]);
+  }
+
+  Drawer globalDrawer(BuildContext context) {
+    return Drawer(
+        child: ListView(
+      padding: EdgeInsets.zero,
+      children: <Widget>[
+        UserAccountsDrawerHeader(
+          accountName: Text('widget.user.email!'),
+          accountEmail: Text('widget.user.email!'),
+          currentAccountPicture: CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Text("A", style: TextStyle(fontSize: 40.0)),
+          ),
+        ),
+        ListTile(
+          title: const Text('Home'),
+          trailing: const Icon(Icons.arrow_forward),
+          onTap: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              HomeScreen.routeName,
+              (route) => true,
+            );
+          },
+        ),
+        ListTile(
+          title: const Text('Item 2'),
+          trailing: const Icon(Icons.arrow_forward),
+          onTap: () {},
+        ),
+        ListTile(
+          title: const Text('Close this drawer'),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    ));
   }
 
   Widget screenTabList(
