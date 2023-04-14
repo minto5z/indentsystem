@@ -91,6 +91,10 @@ class AuthRepository {
     return _storage.read(key: 'refreshToken');
   }
 
+  Future<String?> getContactType() {
+    return _storage.read(key: 'contactType');
+  }
+
   Future<void> setRefreshToken(String token) {
     return _storage.write(key: 'refreshToken', value: token);
   }

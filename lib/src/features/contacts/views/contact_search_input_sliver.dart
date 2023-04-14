@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as store;
+import 'package:indentsystem/src/features/contacts/views/contact_screen.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ContactSearchInputSliver extends StatefulWidget {
@@ -28,7 +30,7 @@ class _ContactSearchInputSliverState extends State<ContactSearchInputSliver> {
   ];
 
   String? selectedValue;
-
+  late final _storage = const store.FlutterSecureStorage();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -133,7 +135,7 @@ class _ContactSearchInputSliverState extends State<ContactSearchInputSliver> {
                                                         ContactType>(
                                                       value: item,
                                                       child: Text(
-                                                        item.name!,
+                                                        item.name,
                                                         style: const TextStyle(
                                                           fontSize: 14,
                                                         ),
@@ -180,6 +182,12 @@ class _ContactSearchInputSliverState extends State<ContactSearchInputSliver> {
                                               if (_formKey.currentState!
                                                   .validate()) {
                                                 _formKey.currentState!.save();
+                                                setContactType(selectedValue!);
+                                                Navigator.of(context).pop();
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const ContactScreen()));
                                               }
                                             },
                                             child: const Text('Submit Button'),
@@ -209,6 +217,10 @@ class _ContactSearchInputSliverState extends State<ContactSearchInputSliver> {
     _textChangeStreamController.close();
     _textChangesSubscription.cancel();
     super.dispose();
+  }
+
+  Future<void> setContactType(String type) {
+    return _storage.write(key: 'contactType', value: type);
   }
 }
 

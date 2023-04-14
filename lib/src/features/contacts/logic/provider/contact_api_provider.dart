@@ -29,6 +29,31 @@ class ContactAPIProvider {
       throw NoConnectionException();
     }
   }
+
+  static Future<ContactResponse> getCharacterListWithType(
+    int offset,
+    int limit, {
+    String? searchTerm,
+    int? contactType,
+    String? accessToken,
+  }) async {
+    try {
+      final response = await api.get(
+        _ApiUrlBuilder.characterListWithType(offset, limit,
+                searchTerm: searchTerm, type: contactType)
+            .toString(),
+        options: Options(headers: {AuthTokenInterceptor.skipHeader: true}),
+      );
+
+      if (response.statusCode == 200) {
+        return ContactResponse.fromJson(response.data);
+      } else {
+        throw GenericHttpException();
+      }
+    } on SocketException {
+      throw NoConnectionException();
+    }
+  }
 }
 
 class _ApiUrlBuilder {
@@ -46,8 +71,22 @@ class _ApiUrlBuilder {
         '${_buildSearchTermQuery(searchTerm)}',
       );
 
+  static Uri characterListWithType(
+    int offset,
+    int limit, {
+    String? searchTerm,
+    int? type,
+  }) =>
+      Uri.parse(
+        '$_baseUrl?'
+        'offset=$offset'
+        '&limit=$limit'
+        '&type=$type'
+        '${_buildSearchTermQuery(searchTerm)}',
+      );
+
   static String _buildSearchTermQuery(String? searchTerm) =>
       searchTerm != null && searchTerm.isNotEmpty
-          ? '&type=${searchTerm.replaceAll(' ', '+').toLowerCase()}'
+          ? '&name=${searchTerm.replaceAll(' ', '+').toLowerCase()}'
           : '';
 }

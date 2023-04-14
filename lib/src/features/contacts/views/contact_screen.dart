@@ -60,12 +60,25 @@ class _ContactScreenState extends State<ContactScreen> {
     try {
       final repository = context.read<AuthRepository>();
       final accessToken = await repository.getAccessToken();
-      final newItems = await ContactAPIProvider.getCharacterList(
-        pageKey,
-        _pageSize,
-        searchTerm: _searchTerm,
-        accessToken: accessToken,
-      );
+      final contactType = await repository.getContactType() ?? '0';
+      var newItems;
+      var type = int.parse(contactType);
+      if (type != 0) {
+        newItems = await ContactAPIProvider.getCharacterListWithType(
+          pageKey,
+          _pageSize,
+          searchTerm: _searchTerm,
+          contactType: type,
+          accessToken: accessToken,
+        );
+      } else {
+        newItems = await ContactAPIProvider.getCharacterList(
+          pageKey,
+          _pageSize,
+          searchTerm: _searchTerm,
+          accessToken: accessToken,
+        );
+      }
 
       final isLastPage = (newItems.data?.length != null)
           ? newItems.data?.length
