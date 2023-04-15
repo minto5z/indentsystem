@@ -21,7 +21,6 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
-  // initialize global widget
   final _globalWidget = GlobalWidget();
 
   static const _pageSize = 10;
